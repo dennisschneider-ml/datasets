@@ -19,10 +19,10 @@ make
 This results in the following data tree:
 ```shell
 ./data
--- new_dataset
-  -- original
-  -- preprocessing
-  -- preprocess.py
+|-- <dataset>/
+  |-- original/
+  |-- preprocessing/
+  |-- preprocess.py
 ```
 In this step you can place the raw data-files in the `original`-subdirectory.
 In the following, the datafiles in `original` will be transformed to `preprocessed` through the `process.py`-script.
