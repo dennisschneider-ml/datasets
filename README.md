@@ -32,3 +32,10 @@ The dataset is processed by running a command which is as simple as it is famili
 make
 ```
 The Makefile conveniently detects which datasets need a file-structure and which have unprocessed data. So mass-processing multiple datasets over night is as easy it gets.
+
+## I want to use this without the Docker ... stuff
+
+Sure, just change the following variable at the top of the Makefile:
+```Makefile
+PROCESSING_SCRIPT=./preprocess.py
+```
