@@ -1,6 +1,6 @@
 # judo-datasets
 
-This is the git repository of the [dennisschneiderml/judo-datasets](https://hub.docker.com/repository/docker/dennisschneiderml/judo-datasets/general) Docker-File.
+This is the git repository of the [dennisschneiderml/judo-datasets](https://hub.docker.com/repository/docker/dennisschneiderml/judo-datasets/general) Docker Image.
 
 It adds a reproducible way to handle datasets.
 
