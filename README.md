@@ -7,12 +7,14 @@ It adds a reproducible way to handle datasets.
 ## Why would I want to use judo-datasets?
 
 If you use datasets in a project, you probably want other researchers to be able to easily reproduce your results, beginning with using the same datasets.
-Furthermore, you probably preprocess the data you get and not use the raw datasets as they are available.
+Most research projects provide a step-by-step instruction on how to get these datasets.
+But why not encapsule all this into a single command? \
+judo-datasets is an extension of the judo project and provides an easy and reproducible way to preprocess datasets by simply invoking the `make` command, generating only these datasets which have not been processed yet, which also makes it suitable for using while continuously adding new datasets to the project.
 
-## And how does it help me with that?
+## Great, so how does it work?
 
-After finding a dataset you want to use in your project, you add an empty directory in the directory `./data`.
-The recommended file-structure for the project is created by running the following command.
+After finding a dataset you want to use in your project, add an empty directory in the `./data` directory.
+The recommended file-structure for the dataset is created by running the following command.
 ```shell
 make
 ```
@@ -24,18 +26,16 @@ This results in the following data tree:
   |-- preprocessing/
   |-- preprocess.py
 ```
-In this step you can place the raw data-files in the `original`-subdirectory.
-In the following, the datafiles in `original` will be transformed to `preprocessed` through the `process.py`-script.
+At this point you can place the raw data-files in the `original`-subdirectory.
+By invoking `make` once more, the datafiles in `original` will be transformed to `preprocessed` through the `process.py`-script.
 It conveniently already employs multithreading and splits up the dataset among all CPU-cores. You simply have to implement the preprocessing-logic in the `process`-funtion in the python-script. \
-The dataset is processed by running a command which is as simple as it is familiar:
-```shell
-make
-```
+
 The Makefile conveniently detects which datasets need a file-structure and which have unprocessed data. So mass-processing multiple datasets over night is as easy it gets.
 
 ## I want to use this without the Docker ... stuff
 
-Sure, just change the following variable at the top of the Makefile:
+Sure, for this case, you are only interested in the files in `src/`. 
+Simply change the following variable at the top of the Makefile:
 ```Makefile
 PROCESSING_SCRIPT=./preprocess.py
 ```
