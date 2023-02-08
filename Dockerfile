@@ -2,9 +2,6 @@ FROM jupyter/scipy-notebook
 
 WORKDIR /home/jovyan/work
 
-COPY preprocess.py /usr/share/judo/preprocess.py
-
-# Setup functionality in working directory.
-COPY Makefile .
-RUN mkdir data
-
+COPY ./src/preprocess.py /usr/local/share/judo/preprocess.py
+COPY ./src/install_judo-datasets.sh /usr/local/bin/start-notebook.d/
+COPY ./src/Makefile /tmp/
