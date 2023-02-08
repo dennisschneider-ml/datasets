@@ -1,7 +1,7 @@
 .SECONDEXPANSION: 
 
 
-PROCESSING_SCRIPT=/usr/share/judo/preprocess.py
+PROCESSING_SCRIPT='/usr/local/share/judo/preprocess.py'
 # The root-directory where to look for datasets.
 DATASETS=$(wildcard data/*)
 
