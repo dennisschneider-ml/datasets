@@ -3,10 +3,14 @@
 
 PROCESSING_SCRIPT='/usr/local/share/judo/preprocess.py'
 # The root-directory where to look for datasets.
-DATASETS=$(wildcard data/*)
+ROOT=data
+DATASETS=$(wildcard $(ROOT)/*)
 
 
-data: $(DATASETS)
+datasets: $(ROOT) $(DATASETS)
+
+$(ROOT):
+	mkdir $(ROOT)
 
 # A dataset has the following dependencies:
 # The file-structure has to exist ('original' and 'preprocessed'-directories).
@@ -19,7 +23,7 @@ $(DATASETS): $$@/original $$(subst original,preprocessed,$$(wildcard $$@/origina
 	$(call create_initial_file_structure,$(subst /original,,$@))
 
 # Only gets executed if no preprocessed files corresponding to the originals exist.
-data/%$(wildcard preprocessed/*.csv):
+$(ROOT)/%$(wildcard preprocessed/*.csv):
 	$(call preprocess_data,$@)
 
 
