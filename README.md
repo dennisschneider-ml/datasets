@@ -1,8 +1,6 @@
 # judo-datasets
 
-This is the git repository of the [dennisschneiderml/judo-datasets](https://hub.docker.com/repository/docker/dennisschneiderml/judo-datasets/general) Docker Image.
-
-It adds a reproducible way to handle datasets.
+This is a plugin to the judo-project, which adds a reproducible way to preprocess datasets.
 
 ## Why would I want to use judo-datasets?
 
@@ -28,9 +26,9 @@ This results in the following data tree:
 ```
 At this point you can place the raw data-files in the `original`-subdirectory.
 By invoking `make` once more, the datafiles in `original` will be transformed to `preprocessed` through the `process.py`-script.
-It conveniently already employs multithreading and splits up the dataset among all CPU-cores. You simply have to implement the preprocessing-logic in the `process`-funtion in the python-script. \
+It conveniently already employs multithreading and splits up the dataset among all CPU-cores. You simply have to implement the preprocessing-logic in the `process`-funtion in the python-script.
 
-The Makefile conveniently detects which datasets need a file-structure and which have unprocessed data. So mass-processing multiple datasets over night is as easy it gets.
+The Makefile conveniently detects which datasets need a file-structure and which have unprocessed data. So mass-processing multiple datasets over night is as easy as it gets.
 
 ## I want to use this without the Docker ... stuff
 
