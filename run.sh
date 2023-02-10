@@ -1,3 +1,3 @@
 #!/bin/sh
 
-[ -f $WORKDIR/Makefile ] || cp ./assets/Makefile $WORKDIR
+[ -f $WORKDIR/Makefile ] || cp ./Makefile $WORKDIR
