@@ -1,6 +1,6 @@
 # judo-datasets
 
-This is a plugin to the judo-project, which adds a reproducible way to preprocess datasets.
+This is a plugin for the [judo](https://github.com/dennisschneider-ml/judo) project, which adds a reproducible way to preprocess datasets.
 
 ## Why would I want to use judo-datasets?
 
@@ -11,18 +11,18 @@ judo-datasets is an extension of the judo project and provides an easy and repro
 
 ## Great, so how does it work?
 
-After finding a dataset you want to use in your project, add an empty directory in the `./data` directory.
-The recommended file-structure for the dataset is created by running the following command.
-```shell
-make
-```
+First, run `make` once to create the `./data/` directory in the root of your project.
+
+After finding a dataset you want to use, add an empty directory in this `./data/` directory.
+Run `make` again to create the recommended directory structure for the new dataset.
+
 This results in the following data tree:
 ```shell
-./data
-|-- <dataset>/
-  |-- original/
-  |-- preprocessing/
-  |-- preprocess.py
+ data
+└──  dataset
+   ├──  original
+   ├──  preprocess.py
+   └──  preprocessed
 ```
 At this point you can place the raw data-files in the `original`-subdirectory.
 By invoking `make` once more, the datafiles in `original` will be transformed to `preprocessed` through the `process.py`-script.
