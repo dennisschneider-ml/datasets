@@ -1,13 +1,13 @@
 .SECONDEXPANSION: 
 
 
-PROCESSING_SCRIPT='preprocess.py' # /tmp/plugins/judo-datasets/preprocess.py'
+PROCESSING_SCRIPT='/tmp/plugins/judo-datasets/preprocess.py'
 # The root-directory where to look for datasets.
 ROOT=data
 DATASETS=$(wildcard $(ROOT)/*)
 
 
-datasets: $(ROOT) $(DATASETS)
+datasets: $(DATASETS) | $(ROOT)
 
 $(ROOT):
 	mkdir $(ROOT)
@@ -15,7 +15,7 @@ $(ROOT):
 # A dataset has the following dependencies:
 # The file-structure has to exist ('original' and 'preprocessed'-directories).
 # For each original file, a preprocessed one has to exist. (original/train.csv -> preprocessed/train.csv).
-$(DATASETS): $$@/original $$(subst $$@/original,$$@/preprocessed,$$(wildcard $$@/original/*.csv))
+$(DATASETS): $$(subst $$@/original,$$@/preprocessed,$$(wildcard $$@/original/*.csv)) | $$@/original
 
 # Only gets executed if the local "/original" subdirectory does not exist.
 %/original:
