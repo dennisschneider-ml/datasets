@@ -1,6 +1,6 @@
 # judo-datasets
 
-This is a plugin for the [judo](https://github.com/dennisschneider-ml/judo) project, which adds a reproducible way to preprocess datasets.
+This is a plugin for the [judo](https://github.com/dennisschneider-ml/judo) project and adds a reproducible way to preprocess datasets.
 
 ## Why would I want to use judo-datasets?
 
@@ -32,8 +32,10 @@ The Makefile conveniently detects which datasets need a file-structure and which
 
 ## I want to use this without the Docker ... stuff
 
-Sure, for this case, you are only interested in the files in `src/`. 
-Simply change the following variable at the top of the Makefile:
+Sure, for this case, you are not interested in the `run.py`-file.
+In order to get only the relevant files and set them up correctly, run the following commands:
 ```Makefile
-PROCESSING_SCRIPT=./preprocess.py
+wget https://raw.githubusercontent.com/dennisschneider-ml/judo-datasets/main/Makefile
+wget https://raw.githubusercontent.com/dennisschneider-ml/judo-datasets/main/preprocess.py
+sed -i 's/^PROCESSING_SCRIPT=.*$/PROCESSING_SCRIPT=.\/preprocess.py/' Makefile
 ```
