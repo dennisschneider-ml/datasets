@@ -7,9 +7,10 @@ This is a plugin for the [judo](https://github.com/dennisschneider-ml/judo) proj
 If you use datasets in a project, you probably want other researchers to be able to easily reproduce your results, beginning with using the same datasets.
 Most research projects provide a step-by-step instruction on how to get these datasets.
 But why not encapsule all this into a single command? \
-judo-datasets is an extension of the judo project and provides an easy and reproducible way to preprocess datasets by simply invoking the `make` command, generating only these datasets which have not been processed yet, which also makes it suitable for using while continuously adding new datasets to the project.
+judo-datasets is an extension of the judo project and provides an easy and reproducible way to generate datasets by simply invoking the `make` command, generating only these datasets which have not been processed yet, which also makes it suitable for using while continuously adding new datasets to the project.
 
 ## Great, so how does it work?
+
 
 First, run `make` once to create the `./data/` directory in the root of your project.
 
@@ -20,8 +21,8 @@ This results in the following data tree:
 ```shell
  data
 └──  dataset
-   ├──  original
    ├──  get_original_data.sh
+   ├──  original
    ├──  preprocess.py
    └──  preprocessed
 ```
