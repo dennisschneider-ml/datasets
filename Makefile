@@ -1,7 +1,7 @@
 .SECONDEXPANSION: 
 
 
-PROCESSING_SCRIPT='/tmp/plugins/judo-datasets/preprocess.py'
+PROCESSING_SCRIPT=preprocess.py # '/tmp/plugins/judo-datasets/preprocess.py'
 # The root-directory where to look for datasets.
 ROOT=data
 DATASETS=$(wildcard $(ROOT)/*)
@@ -15,15 +15,20 @@ $(ROOT):
 # A dataset has the following dependencies:
 # The file-structure has to exist ('original' and 'preprocessed'-directories).
 # For each original file, a preprocessed one has to exist. (original/train.csv -> preprocessed/train.csv).
-$(DATASETS): $$(subst $$@/original,$$@/preprocessed,$$(wildcard $$@/original/*.csv)) | $$@/original
+$(DATASETS): $$@/original $$(call do_originals_exist,$$@) $$(subst $$@/original,$$@/preprocessed,$$(wildcard $$@/original/*))
 
 # Only gets executed if the local "/original" subdirectory does not exist.
 %/original:
 	@echo ""
 	$(call create_initial_file_structure,$(@D))
 
+# Only gets executed if no raw files exist.
+$(ROOT)/%/get_original_data:
+	@echo "No raw files exist. Retrieving ..."
+	cd $(@D) && sh get_original_data.sh
+	
 # Only gets executed if no preprocessed files corresponding to the originals exist.
-$(ROOT)/%$(wildcard preprocessed/*.csv):
+$(ROOT)/%$(wildcard preprocessed/*):
 	$(call preprocess_data,$@)
 
 
@@ -32,6 +37,11 @@ define create_initial_file_structure
 	mkdir $(1)/original
 	mkdir $(1)/preprocessed
 	cp $(PROCESSING_SCRIPT) $(1)/preprocess.py
+	touch $(1)/get_original_data.sh
+endef
+
+define do_originals_exist
+	$(shell [[ $$(ls -A $(1)/original | wc -l) -gt 0 ]] || echo '$(1)/get_original_data')
 endef
 
 define preprocess_data
