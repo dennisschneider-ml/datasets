@@ -21,14 +21,18 @@ This results in the following data tree:
  data
 └──  dataset
    ├──  original
+   ├──  get_original_data.sh
    ├──  preprocess.py
    └──  preprocessed
 ```
-At this point you can place the raw data-files in the `original`-subdirectory.
-By invoking `make` once more, the datafiles in `original` will be transformed to `preprocessed` through the `process.py`-script.
-It conveniently already employs multithreading and splits up the dataset among all CPU-cores. You simply have to implement the preprocessing-logic in the `process`-funtion in the python-script.
+At this point you can place the commands for populating the `original`-subdirectory in the `get_original_data.sh` file.
+Furthermore, the `preprocess.py` script enables us to preprocess the original datasets for further usage.
+By invoking `make` once more, the sh script is invoked and the files are downloaded (or however you choose to retrieve these files).
+And, since no files have been preprocessed yet, all files in `original` are then suitably converted into preprocessed files by running them through `preprocess.py`.
+It conveniently already employs multithreading and splits up the dataset among all CPU-cores. You simply have to implement the preprocessing-logic in the `process`-function in the python-script.
 
-The Makefile conveniently detects which datasets need a file-structure and which have unprocessed data. So mass-processing multiple datasets over night is as easy as it gets.
+The Makefile conveniently detects which datasets need a file-structure, which files have to be downloaded and which have unprocessed data. So mass-processing multiple datasets over night is as easy as it gets. \
+Furthermore, by adding the `original` and `preprocessed` subdirectories in the gitignore, a researcher can reproduce all datasets by simply running `make`.
 
 ## I want to use this without the Docker ... stuff
 
