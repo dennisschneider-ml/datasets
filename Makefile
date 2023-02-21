@@ -25,7 +25,7 @@ $(DATASETS): $$@/original $$(call do_originals_exist,$$@) $$(subst $$@/original,
 # Only gets executed if no raw files exist.
 $(ROOT)/%/get_original_data:
 	@echo "No raw files exist. Retrieving ..."
-	cd $(@D) && sh get_original_data.sh
+	@cd $(@D) && sh get_original_data.sh
 	
 # Only gets executed if no preprocessed files corresponding to the originals exist.
 $(ROOT)/%$(wildcard preprocessed/*):
@@ -41,7 +41,7 @@ define create_initial_file_structure
 endef
 
 define do_originals_exist
-	$(shell [[ $$(ls -A $(1)/original | wc -l) -gt 0 ]] || echo '$(1)/get_original_data')
+	$(shell [[ $$(ls -A $(1)/original 2> /dev/null | wc -l) -gt 0 ]] || echo '$(1)/get_original_data')
 endef
 
 define preprocess_data
