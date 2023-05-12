@@ -1,8 +1,12 @@
-# judo-datasets
+# datasets
 
-This is a plugin for the [judo](https://github.com/dennisschneider-ml/judo) project and adds a reproducible way to preprocess datasets.
+This is a template project which adds a reproducible way to preprocess datasets.
 
-## Why would I want to use judo-datasets?
+## Installation
+
+Clone this repository and run `sh install.sh`.
+
+## Why would I want to use datasets?
 
 If you use datasets in a project, you probably want other researchers to be able to easily reproduce your results, beginning with using the same datasets.
 Most research projects provide a step-by-step instruction on how to get these datasets.
@@ -10,7 +14,6 @@ But why not encapsule all this into a single command? \
 judo-datasets is an extension of the judo project and provides an easy and reproducible way to generate datasets by simply invoking the `make` command, generating only these datasets which have not been processed yet, which also makes it suitable for using while continuously adding new datasets to the project.
 
 ## Great, so how does it work?
-
 
 First, run `make` once to create the `./data/` directory in the root of your project.
 
@@ -34,13 +37,3 @@ It conveniently already employs multithreading and splits up the dataset among a
 
 The Makefile conveniently detects which datasets need a file-structure, which files have to be downloaded and which have unprocessed data. So mass-processing multiple datasets over night is as easy as it gets. \
 Furthermore, by adding the `original` and `preprocessed` subdirectories in the gitignore, a researcher can reproduce all datasets by simply running `make`.
-
-## I want to use this without the Docker ... stuff
-
-Sure, for this case, you are not interested in the `run.py`-file.
-In order to get only the relevant files and set them up correctly, run the following commands:
-```Makefile
-wget https://raw.githubusercontent.com/dennisschneider-ml/judo-datasets/main/Makefile
-wget https://raw.githubusercontent.com/dennisschneider-ml/judo-datasets/main/preprocess.py
-sed -i 's/^PROCESSING_SCRIPT=.*$/PROCESSING_SCRIPT=.\/preprocess.py/' Makefile
-```

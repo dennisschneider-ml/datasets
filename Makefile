@@ -1,7 +1,7 @@
 .SECONDEXPANSION: 
 
 
-PROCESSING_SCRIPT='/tmp/plugins/judo-datasets/preprocess.py'
+PROCESSING_SCRIPT='$(PWD)/.datasets/preprocess.py'
 # The root-directory where to look for datasets.
 ROOT=data
 DATASETS=$(wildcard $(ROOT)/*)
